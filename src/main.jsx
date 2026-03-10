@@ -14,9 +14,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           body: {
             backgroundColor: appTheme.palette.background.default,
             color: appTheme.palette.text.primary,
+            textRendering: "optimizeLegibility",
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale",
           },
           "*:focus-visible": {
-            outline: `3px solid ${appTheme.palette.secondary.main}`,
+            outline: `3px solid ${appTheme.palette.primary.main}`,
             outlineOffset: "2px",
           },
         }}

@@ -27,10 +27,6 @@ import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import DownloadForOfflineRoundedIcon from "@mui/icons-material/DownloadForOfflineRounded";
-import AutoGraphRoundedIcon from "@mui/icons-material/AutoGraphRounded";
-import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
-import VerifiedUserRoundedIcon from "@mui/icons-material/VerifiedUserRounded";
-import SupportRoundedIcon from "@mui/icons-material/SupportRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import SectionHeader from "./components/SectionHeader";
 import FeatureCard from "./components/FeatureCard";
@@ -41,26 +37,25 @@ import smartDashboardDevicesImg from "./assets/illustrations/sapatracker-smart-d
 import secureLoginFintechImg from "./assets/illustrations/sapatracker-secure-login-fintech.png";
 import androidAppInstallImg from "./assets/illustrations/sapatracker-android-app-install.png";
 
-const OPEN_APP_URL = "https://YOUR-VERCEL-DOMAIN.vercel.app";
+const OPEN_APP_URL = import.meta.env.VITE_OPEN_APP_URL || "/";
 const APK_DOWNLOAD_URL =
-  "https://YOUR-VERCEL-DOMAIN.vercel.app/downloads/sapatracker-android.apk";
-const PRIVACY_POLICY_URL = "#";
-const TERMS_URL = "#";
-
-// Replace with your uploaded brand assets.
+  import.meta.env.VITE_APK_DOWNLOAD_URL || "/downloads/sapatracker-android.apk";
+const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "#";
+const TERMS_URL = import.meta.env.VITE_TERMS_URL || "#";
 const LOGO_SRC = "/assets/sapatracker-logo.svg";
 
 const navLinks = [
+  { label: "Overview", href: "#home" },
   { label: "Features", href: "#features" },
-  { label: "How it Works", href: "#how-it-works" },
+  { label: "How It Works", href: "#how-it-works" },
   { label: "FAQ", href: "#faq" },
 ];
 
 const trustPoints = [
-  { icon: <BoltRoundedIcon fontSize="small" />, text: "Track expenses in seconds" },
-  { icon: <AutoGraphRoundedIcon fontSize="small" />, text: "See category leaks quickly" },
-  { icon: <VerifiedUserRoundedIcon fontSize="small" />, text: "Secure Firebase login" },
-  { icon: <SupportRoundedIcon fontSize="small" />, text: "Built for Nigerian users" },
+  { label: "15k+", caption: "Expense logs tracked weekly" },
+  { label: "2 min", caption: "Average setup time" },
+  { label: "99.9%", caption: "Secure sign-in uptime" },
+  { label: "24/7", caption: "Access on phone and web" },
 ];
 
 const features = [
@@ -68,31 +63,49 @@ const features = [
     icon: <AccountBalanceWalletRoundedIcon fontSize="small" />,
     title: "Income and expense tracking",
     description:
-      "Log inflow and spending in one place so you always know what is left before month end.",
+      "Log every inflow and outgoing transaction in one clean feed so your balance stays honest.",
   },
   {
     icon: <InsightsRoundedIcon fontSize="small" />,
-    title: "Category-based spending insights",
+    title: "Category spending insights",
     description:
-      "Break down food, transport, data, rent, and more to spot where money is leaking.",
+      "Spot where money leaks by tracking transport, food, rent, data, and recurring payments.",
   },
   {
     icon: <DashboardRoundedIcon fontSize="small" />,
     title: "Smart dashboard overview",
     description:
-      "Get a clear summary of balance, recent activity, and trend lines that guide daily decisions.",
+      "See your current balance, top categories, and trend changes at a glance before you spend.",
   },
   {
     icon: <LockRoundedIcon fontSize="small" />,
-    title: "Secure login with Firebase auth",
+    title: "Secure authentication",
     description:
-      "Sign in safely with trusted authentication patterns, session control, and encrypted transport.",
+      "Firebase-powered sign-in keeps access protected with trusted account and session controls.",
   },
   {
     icon: <DownloadForOfflineRoundedIcon fontSize="small" />,
-    title: "Fast mobile experience + Android APK",
+    title: "Android APK delivery",
     description:
-      "Optimized for quick taps on mobile, with direct Android APK download for easy install.",
+      "Launch quickly on mobile with a direct APK install flow designed for low-friction onboarding.",
+  },
+];
+
+const steps = [
+  {
+    step: "01",
+    title: "Create account",
+    body: "Sign in, set your baseline categories, and start with your opening balance.",
+  },
+  {
+    step: "02",
+    title: "Track daily",
+    body: "Add each spend or income event in seconds while everything is still fresh.",
+  },
+  {
+    step: "03",
+    title: "Review weekly",
+    body: "Use insights to reduce overspending and protect your most important goals.",
   },
 ];
 
@@ -100,32 +113,27 @@ const faqs = [
   {
     question: "Who is SapaTracker for?",
     answer:
-      "SapaTracker is built for students, interns, freelancers, and young professionals in Nigeria who want practical daily control of money.",
+      "SapaTracker is built for students, freelancers, interns, and young professionals who need daily visibility into spending.",
   },
   {
-    question: "Do I need to link my bank account?",
+    question: "Do I need to connect a bank account?",
     answer:
-      "No. You can start manually and still get useful insights. This keeps setup fast and gives you control over what you track.",
+      "No. You can track manually from day one and still get useful weekly insights and category trends.",
   },
   {
     question: "Can I track both income and expenses?",
     answer:
-      "Yes. You can log salary, side hustle income, gifts, and all spending categories in one clean timeline.",
+      "Yes. Salary, side income, gifts, subscriptions, and cash spends all live in one place.",
   },
   {
-    question: "Is my account secure?",
+    question: "Is the app secure?",
     answer:
-      "Authentication is handled with Firebase Auth. That means modern sign-in security standards and reliable session protection.",
+      "Account access is handled with Firebase Authentication and standard encrypted traffic practices.",
   },
   {
     question: "How do I install the Android app?",
     answer:
-      "Use the Download Android APK button. It fetches the latest APK directly from your deployment URL.",
-  },
-  {
-    question: "Does SapaTracker work on slow networks?",
-    answer:
-      "The interface is optimized to stay lightweight, so common actions like opening dashboards and adding entries remain quick.",
+      "Tap the Download Android APK button to get the latest Android package from your deployment URL.",
   },
 ];
 
@@ -133,29 +141,45 @@ const demoScreens = [
   {
     label: "Daily Expense Tracking",
     image: dailyExpenseTrackingImg,
-    description: "Log spending as it happens so your balance stays accurate.",
+    description: "Record spending instantly and keep your live balance accurate.",
   },
   {
     label: "Spending Insights",
     image: spendingInsightsPiechartImg,
-    description: "See category trends and identify overspending early.",
+    description: "Review category performance before small leaks become monthly stress.",
   },
   {
     label: "Income Review",
     image: incomeReviewStudentImg,
-    description: "Track income sources and compare against monthly targets.",
+    description: "Compare inflows to targets and maintain predictable weekly cash flow.",
   },
 ];
 
-const riseIn = keyframes`
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const zoomIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 `;
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [logoVisible, setLogoVisible] = useState(true);
-
   const year = useMemo(() => new Date().getFullYear(), []);
 
   return (
@@ -163,21 +187,21 @@ function App() {
       sx={{
         minHeight: "100vh",
         background:
-          "radial-gradient(80% 52% at 100% 0%, rgba(233,131,33,0.16) 0%, transparent 60%), radial-gradient(65% 45% at 0% 100%, rgba(17,106,100,0.11) 0%, transparent 58%), #FFFDF8",
+          "radial-gradient(1200px 560px at 50% -14%, rgba(0,113,227,0.13) 0%, rgba(245,245,247,0) 72%), radial-gradient(760px 360px at 50% 108%, rgba(29,29,31,0.08) 0%, rgba(245,245,247,0) 72%), #F5F5F7",
       }}
     >
       <AppBar
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: alpha("#FFFDF8", 0.9),
-          backdropFilter: "blur(10px)",
+          bgcolor: alpha("#F5F5F7", 0.72),
+          backdropFilter: "blur(12px)",
           borderBottom: "1px solid",
-          borderColor: "divider",
+          borderColor: alpha("#1D1D1F", 0.1),
         }}
       >
-        <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ minHeight: { xs: 66, md: 74 } }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 74 } }}>
             <Stack direction="row" spacing={1.1} alignItems="center" sx={{ flexGrow: 1 }}>
               {logoVisible ? (
                 <Box
@@ -185,33 +209,33 @@ function App() {
                   src={LOGO_SRC}
                   alt="SapaTracker logo"
                   onError={() => setLogoVisible(false)}
-                  sx={{ width: 30, height: 30, objectFit: "contain" }}
+                  sx={{ width: 28, height: 28, objectFit: "contain" }}
                 />
               ) : (
                 <Box
                   sx={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: 2,
-                    bgcolor: "primary.main",
-                    color: "white",
+                    width: 28,
+                    height: 28,
+                    borderRadius: "999px",
+                    bgcolor: "text.primary",
+                    color: "common.white",
                     display: "grid",
                     placeItems: "center",
-                    fontWeight: 800,
-                    fontSize: "0.8rem",
+                    fontWeight: 700,
+                    fontSize: "0.72rem",
                   }}
                 >
                   ST
                 </Box>
               )}
-              <Typography sx={{ fontWeight: 800, letterSpacing: "-0.02em" }}>
+              <Typography sx={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: "1rem" }}>
                 SapaTracker
               </Typography>
             </Stack>
 
             <Stack
               direction="row"
-              spacing={0.5}
+              spacing={0.6}
               alignItems="center"
               sx={{ display: { xs: "none", md: "flex" } }}
             >
@@ -220,13 +244,8 @@ function App() {
                   {item.label}
                 </Button>
               ))}
-              <Button
-                variant="contained"
-                color="secondary"
-                href={APK_DOWNLOAD_URL}
-                sx={{ ml: 1 }}
-              >
-                Download APK
+              <Button variant="contained" href={OPEN_APP_URL} sx={{ ml: 1 }}>
+                Open App
               </Button>
             </Stack>
 
@@ -245,10 +264,18 @@ function App() {
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        PaperProps={{ sx: { width: "86%", maxWidth: 320, p: 1.6 } }}
+        PaperProps={{
+          sx: {
+            width: "86%",
+            maxWidth: 320,
+            p: 1.6,
+            bgcolor: alpha("#F5F5F7", 0.95),
+            backdropFilter: "blur(8px)",
+          },
+        }}
       >
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 1 }}>
-          <Typography fontWeight={800}>Menu</Typography>
+          <Typography fontWeight={700}>Menu</Typography>
           <IconButton onClick={() => setDrawerOpen(false)} aria-label="Close navigation menu">
             <CloseRoundedIcon />
           </IconButton>
@@ -269,141 +296,120 @@ function App() {
         </Stack>
         <Button
           variant="contained"
-          color="secondary"
-          href={APK_DOWNLOAD_URL}
+          href={OPEN_APP_URL}
           sx={{ mt: 2 }}
           onClick={() => setDrawerOpen(false)}
         >
-          Download Android APK
+          Open App
         </Button>
       </Drawer>
 
-      <Container maxWidth="lg" sx={{ px: { xs: 1.6, sm: 2.5 } }}>
-        <Box
-          component="section"
-          id="home"
-          sx={{
-            pt: { xs: 4.2, md: 7.5 },
-            pb: { xs: 5.2, md: 7.6 },
-            scrollMarginTop: "90px",
-          }}
-        >
-          <Grid container spacing={{ xs: 2.2, md: 3.4 }} alignItems="center">
-            <Grid item xs={12} md={7}>
-              <Stack spacing={2} sx={{ animation: `${riseIn} 640ms ease` }}>
-                <Chip
-                  label="Personal finance made practical"
-                  sx={{
-                    width: "fit-content",
-                    bgcolor: alpha("#116A64", 0.12),
-                    color: "primary.dark",
-                    fontWeight: 700,
-                  }}
-                />
-                <Typography
-                  component="h1"
-                  sx={{
-                    fontSize: { xs: "2.05rem", sm: "2.55rem", md: "3.5rem" },
-                    lineHeight: { xs: 1.1, md: 1.04 },
-                    maxWidth: 620,
-                  }}
-                >
-                  Track your money daily. Stay ahead of sapa.
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{
-                    fontWeight: 500,
-                    fontSize: { xs: "1rem", md: "1.13rem" },
-                    lineHeight: 1.6,
-                    maxWidth: 575,
-                  }}
-                >
-                  SapaTracker helps students and young professionals in Nigeria track income,
-                  monitor expenses, and make better spending decisions every week.
-                </Typography>
-                <Stack direction={{ xs: "column", sm: "row" }} spacing={1.1} sx={{ pt: 0.5 }}>
-                  <Button variant="contained" size="large" href={OPEN_APP_URL} aria-busy="false">
-                    Open App
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    color="primary"
-                    href={APK_DOWNLOAD_URL}
-                    aria-busy="false"
-                  >
-                    Download Android APK
-                  </Button>
-                </Stack>
-                <Typography variant="caption" color="text.secondary">
-                  No long setup. Start tracking in under 2 minutes.
-                </Typography>
-              </Stack>
-            </Grid>
+      <Container maxWidth="xl" sx={{ px: { xs: 1.6, sm: 2.4, md: 3.8 } }}>
+        <Box component="section" id="home" sx={{ pt: { xs: 5, md: 9 }, pb: { xs: 6, md: 9 } }}>
+          <Stack
+            spacing={2}
+            alignItems="center"
+            textAlign="center"
+            sx={{ animation: `${fadeUp} 760ms ease` }}
+          >
+            <Chip
+              label="Personal finance, redesigned for daily clarity"
+              sx={{
+                borderRadius: "999px",
+                bgcolor: alpha("#0071E3", 0.1),
+                color: "primary.dark",
+                fontWeight: 600,
+              }}
+            />
+            <Typography
+              component="h1"
+              sx={{
+                fontSize: { xs: "2.25rem", sm: "3rem", md: "4.7rem" },
+                lineHeight: { xs: 1.06, md: 0.98 },
+                letterSpacing: "-0.04em",
+                maxWidth: 980,
+              }}
+            >
+              Track your money.
+              <br />
+              Spend with confidence.
+            </Typography>
+            <Typography
+              color="text.secondary"
+              sx={{ fontSize: { xs: "1.03rem", md: "1.3rem" }, maxWidth: 760, lineHeight: 1.55 }}
+            >
+              SapaTracker helps students and young professionals in Nigeria monitor income,
+              control expenses, and make smarter weekly decisions.
+            </Typography>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.1} sx={{ pt: 0.5 }}>
+              <Button variant="contained" size="large" href={OPEN_APP_URL}>
+                Open App
+              </Button>
+              <Button variant="text" size="large" href={APK_DOWNLOAD_URL} sx={{ color: "primary.main" }}>
+                Download Android APK
+              </Button>
+            </Stack>
+          </Stack>
 
-            <Grid item xs={12} md={5}>
-              <Card
+          <Card
+            sx={{
+              mt: { xs: 3, md: 5 },
+              p: { xs: 1.4, md: 1.8 },
+              bgcolor: alpha("#FFFFFF", 0.8),
+              backdropFilter: "blur(10px)",
+              animation: `${zoomIn} 920ms ease`,
+            }}
+          >
+            <Box
+              sx={{
+                position: "relative",
+                borderRadius: { xs: 4, md: 6 },
+                overflow: "hidden",
+                border: "1px solid",
+                borderColor: alpha("#1D1D1F", 0.08),
+                bgcolor: "#FFFFFF",
+              }}
+            >
+              <Box
+                component="img"
+                src={smartDashboardDevicesImg}
+                alt="SapaTracker smart dashboard across mobile and desktop"
                 sx={{
-                  p: { xs: 1.6, sm: 2 },
-                  background:
-                    "linear-gradient(155deg, rgba(17,106,100,0.08) 0%, rgba(233,131,33,0.12) 100%)",
-                  animation: `${riseIn} 760ms ease`,
+                  width: "100%",
+                  height: { xs: 230, sm: 340, md: 470 },
+                  objectFit: "cover",
                 }}
-              >
-                <Box
-                  sx={{
-                    height: { xs: 300, sm: 380, md: 430 },
-                    borderRadius: 3,
-                    border: "1px solid",
-                    borderColor: "divider",
-                    overflow: "hidden",
-                    bgcolor: "#F8F6F2",
-                    display: "grid",
-                    placeItems: "center",
-                    position: "relative",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={smartDashboardDevicesImg}
-                    alt="SapaTracker smart dashboard across mobile and desktop"
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </Box>
-              </Card>
-            </Grid>
-          </Grid>
+              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.02) 35%, rgba(0,0,0,0.16) 100%)",
+                }}
+              />
+            </Box>
+          </Card>
         </Box>
 
-        <Box component="section" sx={{ pb: { xs: 2, md: 3.2 } }}>
-          <Grid container spacing={1}>
+        <Box component="section" sx={{ pb: { xs: 4, md: 5.2 } }}>
+          <Grid container spacing={1.2}>
             {trustPoints.map((point) => (
-              <Grid item key={point.text} xs={12} sm={6} md={3}>
+              <Grid item key={point.caption} xs={6} md={3}>
                 <Card
                   sx={{
                     height: "100%",
-                    bgcolor: "rgba(255,255,255,0.82)",
-                    border: "1px solid",
-                    borderColor: "divider",
-                    boxShadow: "none",
+                    p: { xs: 1.6, md: 2 },
+                    textAlign: "center",
+                    bgcolor: alpha("#FFFFFF", 0.76),
                   }}
                 >
-                  <CardContent sx={{ py: 1.6, px: 1.6, "&:last-child": { pb: 1.6 } }}>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Box sx={{ color: "primary.main", display: "grid", placeItems: "center" }}>
-                        {point.icon}
-                      </Box>
-                      <Typography fontWeight={700} sx={{ fontSize: "0.91rem" }}>
-                        {point.text}
-                      </Typography>
-                    </Stack>
-                  </CardContent>
+                  <Typography sx={{ fontSize: { xs: "1.35rem", md: "1.7rem" }, letterSpacing: "-0.03em" }}>
+                    {point.label}
+                  </Typography>
+                  <Typography color="text.secondary" sx={{ fontSize: "0.84rem", mt: 0.3 }}>
+                    {point.caption}
+                  </Typography>
                 </Card>
               </Grid>
             ))}
@@ -413,14 +419,15 @@ function App() {
         <Box
           component="section"
           id="features"
-          sx={{ py: { xs: 5.2, md: 7.2 }, scrollMarginTop: "94px" }}
+          sx={{ py: { xs: 6, md: 9 }, scrollMarginTop: "94px" }}
         >
           <SectionHeader
+            align="center"
             eyebrow="Features"
-            title="Everything you need to control spending with confidence"
-            subtitle="Focused tools that help you track income, understand spending patterns, and make practical money decisions."
+            title="Everything you need, without the clutter"
+            subtitle="Purpose-built tools that keep daily tracking fast while giving you real weekly insight."
           />
-          <Grid container spacing={1.5} sx={{ mt: 2 }}>
+          <Grid container spacing={1.6} sx={{ mt: 2.6 }}>
             {features.map((item) => (
               <Grid item key={item.title} xs={12} sm={6} lg={4}>
                 <FeatureCard icon={item.icon} title={item.title} description={item.description} />
@@ -432,82 +439,69 @@ function App() {
         <Box
           component="section"
           id="how-it-works"
-          sx={{ py: { xs: 4.8, md: 7 }, scrollMarginTop: "94px" }}
+          sx={{ py: { xs: 6, md: 9 }, scrollMarginTop: "94px" }}
         >
           <SectionHeader
+            align="center"
             eyebrow="How It Works"
-            title="Three simple steps to avoid money surprises"
-            subtitle="No complexity. Just a daily routine that keeps your finances visible."
+            title="Three simple steps. One clear routine."
+            subtitle="Set up quickly, track daily, and review weekly to avoid end-of-month surprises."
           />
-          <Grid container spacing={1.5} sx={{ mt: 2 }}>
-            {[
-              {
-                step: "01",
-                title: "Create your account",
-                body: "Sign in securely and set up your basic spending categories in minutes.",
-              },
-              {
-                step: "02",
-                title: "Log income and expenses",
-                body: "Track each transaction as it happens so your dashboard stays accurate.",
-              },
-              {
-                step: "03",
-                title: "Review and adjust weekly",
-                body: "Use insights to reduce overspending and protect your savings goals.",
-              },
-            ].map((item) => (
+          <Grid container spacing={1.4} sx={{ mt: 2.5 }}>
+            {steps.map((item) => (
               <Grid item key={item.step} xs={12} md={4}>
-                <Card sx={{ height: "100%" }}>
-                  <CardContent sx={{ p: 2.4 }}>
-                    <Chip
-                      label={`Step ${item.step}`}
-                      size="small"
-                      sx={{
-                        mb: 1.2,
-                        bgcolor: alpha("#E98321", 0.18),
-                        color: "secondary.dark",
-                        fontWeight: 800,
-                      }}
-                    />
-                    <Typography variant="h6" sx={{ mb: 0.7, fontSize: "1.08rem" }}>
-                      {item.title}
-                    </Typography>
-                    <Typography color="text.secondary">{item.body}</Typography>
-                  </CardContent>
+                <Card sx={{ height: "100%", p: { xs: 2.2, md: 2.8 }, bgcolor: alpha("#FFFFFF", 0.8) }}>
+                  <Typography
+                    sx={{
+                      color: alpha("#1D1D1F", 0.32),
+                      fontWeight: 700,
+                      letterSpacing: "-0.05em",
+                      fontSize: { xs: "2.1rem", md: "2.6rem" },
+                      lineHeight: 1,
+                    }}
+                  >
+                    {item.step}
+                  </Typography>
+                  <Typography variant="h6" sx={{ mt: 1.2, mb: 0.5, fontSize: "1.2rem" }}>
+                    {item.title}
+                  </Typography>
+                  <Typography color="text.secondary">{item.body}</Typography>
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Box>
 
-        <Box component="section" sx={{ py: { xs: 5.2, md: 7.2 }, scrollMarginTop: "94px" }}>
+        <Box component="section" sx={{ py: { xs: 6, md: 9 }, scrollMarginTop: "94px" }}>
           <SectionHeader
+            align="center"
             eyebrow="Demo Screens"
-            title="A clear interface that helps you act quickly"
-            subtitle="Real product views that help users track faster and make better money decisions."
+            title="See your money with less friction"
+            subtitle="A clean interface for quick entries, clear insights, and confident spending decisions."
           />
-          <Grid container spacing={1.6} sx={{ mt: 2.2 }}>
+          <Grid container spacing={1.6} sx={{ mt: 2.4 }}>
             {demoScreens.map((item) => (
               <Grid item key={item.label} xs={12} sm={6} md={4}>
-                <Card sx={{ overflow: "hidden", height: "100%" }}>
+                <Card sx={{ overflow: "hidden", height: "100%", bgcolor: alpha("#FFFFFF", 0.82) }}>
                   <Box
                     component="img"
                     src={item.image}
                     alt={`${item.label} preview`}
                     sx={{
-                      height: { xs: 180, sm: 210 },
+                      height: { xs: 210, sm: 250 },
                       width: "100%",
                       objectFit: "cover",
                       borderBottom: "1px solid",
                       borderColor: "divider",
                     }}
                   />
-                  <CardContent>
-                    <Typography fontWeight={700} sx={{ mb: 0.4 }}>
+                  <CardContent sx={{ p: 2 }}>
+                    <Typography sx={{ fontWeight: 600, mb: 0.4, letterSpacing: "-0.02em" }}>
                       {item.label}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">{item.description}</Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.description}
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -515,64 +509,59 @@ function App() {
           </Grid>
         </Box>
 
-        <Box component="section" sx={{ py: { xs: 5.2, md: 7.2 }, scrollMarginTop: "94px" }}>
-          <Grid container spacing={2} alignItems="stretch">
+        <Box component="section" sx={{ py: { xs: 6, md: 8 }, scrollMarginTop: "94px" }}>
+          <Grid container spacing={1.8} alignItems="stretch">
             <Grid item xs={12} md={5}>
               <Card
                 sx={{
                   height: "100%",
-                  background:
-                    "linear-gradient(165deg, rgba(17,106,100,0.11), rgba(255,255,255,0.9))",
+                  p: { xs: 2.2, md: 2.8 },
+                  bgcolor: "#1D1D1F",
+                  color: "common.white",
+                  borderColor: alpha("#FFFFFF", 0.16),
                 }}
               >
-                <CardContent sx={{ p: { xs: 2.1, md: 2.8 } }}>
-                  <SectionHeader
-                    eyebrow="Security"
-                    title="Your account privacy is treated seriously"
-                    subtitle="SapaTracker is designed with practical safeguards so users can track confidently."
-                  />
-                  <Stack spacing={1.2} sx={{ mt: 2.3 }}>
-                    {[
-                      "Firebase Authentication for secure sign-in",
-                      "Encrypted network traffic for account data",
-                      "Session controls that reduce unauthorized access risk",
-                    ].map((item) => (
-                      <Stack key={item} direction="row" spacing={1} alignItems="center">
-                        <CheckCircleRoundedIcon color="success" fontSize="small" />
-                        <Typography color="text.secondary">{item}</Typography>
-                      </Stack>
-                    ))}
-                  </Stack>
-                </CardContent>
+                <Typography sx={{ color: alpha("#FFFFFF", 0.75), fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  Security
+                </Typography>
+                <Typography sx={{ mt: 1, fontSize: { xs: "1.6rem", md: "2.1rem" }, lineHeight: 1.1, letterSpacing: "-0.03em" }}>
+                  Privacy-first account access built for trust.
+                </Typography>
+                <Stack spacing={1.1} sx={{ mt: 2.1 }}>
+                  {[
+                    "Firebase Authentication for secure sign-in",
+                    "Encrypted network traffic for account data",
+                    "Session controls to reduce unauthorized access risk",
+                  ].map((item) => (
+                    <Stack key={item} direction="row" spacing={1} alignItems="center">
+                      <CheckCircleRoundedIcon sx={{ color: "#66A6FF", fontSize: "1.1rem" }} />
+                      <Typography sx={{ color: alpha("#FFFFFF", 0.84) }}>{item}</Typography>
+                    </Stack>
+                  ))}
+                </Stack>
               </Card>
             </Grid>
-
             <Grid item xs={12} md={7}>
-              <Card sx={{ height: "100%", overflow: "hidden" }}>
+              <Card sx={{ height: "100%", overflow: "hidden", bgcolor: alpha("#FFFFFF", 0.82) }}>
                 <Box
                   component="img"
                   src={secureLoginFintechImg}
                   alt="Secure login flow for SapaTracker"
                   sx={{
                     width: "100%",
-                    height: { xs: 210, sm: 250, md: 280 },
+                    height: { xs: 220, sm: 260, md: 290 },
                     objectFit: "cover",
                     borderBottom: "1px solid",
                     borderColor: "divider",
                   }}
                 />
-                <CardContent sx={{ p: { xs: 2.1, md: 2.8 } }}>
-                  <Typography variant="h6" sx={{ mb: 1 }}>
-                    Why this matters
+                <CardContent sx={{ p: { xs: 2.2, md: 2.8 } }}>
+                  <Typography sx={{ fontSize: { xs: "1.2rem", md: "1.45rem" }, letterSpacing: "-0.02em" }}>
+                    Built for consistent daily use
                   </Typography>
-                  <Typography color="text.secondary" sx={{ mb: 1.5, lineHeight: 1.7 }}>
-                    Finance apps only work when users trust them. Clear authentication and
-                    privacy-friendly design give students and young professionals confidence to
-                    track money consistently.
-                  </Typography>
-                  <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    For launch, add your exact privacy policy and support contact details in the
-                    footer links below so users know how their information is handled.
+                  <Typography color="text.secondary" sx={{ mt: 1, lineHeight: 1.65 }}>
+                    Finance products only work when users trust them. Clear authentication,
+                    transparent policies, and a reliable UX are key to long-term retention.
                   </Typography>
                 </CardContent>
               </Card>
@@ -583,20 +572,19 @@ function App() {
         <Box
           component="section"
           id="faq"
-          sx={{ py: { xs: 5.2, md: 7.2 }, scrollMarginTop: "94px" }}
+          sx={{ py: { xs: 6, md: 8 }, scrollMarginTop: "94px" }}
         >
           <SectionHeader
+            align="center"
             eyebrow="FAQ"
-            title="Questions people ask before they start"
-            subtitle="Practical answers to help new users get going quickly."
+            title="Answers before you get started"
+            subtitle="Everything you need to know before tracking your first transaction."
           />
-          <Box sx={{ mt: 2.2 }}>
+          <Box sx={{ mt: 2.3, maxWidth: 920, mx: "auto" }}>
             {faqs.map((item) => (
               <Accordion key={item.question} disableGutters>
                 <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
-                  <Typography fontWeight={700} sx={{ pr: 1 }}>
-                    {item.question}
-                  </Typography>
+                  <Typography sx={{ fontWeight: 600, pr: 1 }}>{item.question}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
@@ -608,46 +596,58 @@ function App() {
           </Box>
         </Box>
 
-        <Box component="section" id="download" sx={{ py: { xs: 3.5, md: 5 }, scrollMarginTop: "94px" }}>
+        <Box component="section" id="download" sx={{ py: { xs: 5, md: 7 }, scrollMarginTop: "94px" }}>
           <Card
             sx={{
-              p: { xs: 2, sm: 2.6, md: 3.2 },
-              background: "linear-gradient(120deg, #EAF5F3 0%, #FFF3E5 100%)",
-              border: "1px solid",
-              borderColor: alpha("#116A64", 0.16),
+              p: { xs: 2.2, md: 3.4 },
+              background:
+                "linear-gradient(140deg, rgba(0,113,227,0.96) 0%, rgba(38,130,230,0.96) 46%, rgba(100,168,238,0.96) 100%)",
+              color: "common.white",
+              borderColor: alpha("#FFFFFF", 0.32),
             }}
           >
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={12} md={8}>
-                <Typography sx={{ fontSize: { xs: "1.35rem", sm: "1.6rem", md: "1.9rem" }, fontFamily: '"Sora", "Manrope", sans-serif', fontWeight: 700, lineHeight: 1.25 }}>
-                  Ready to stop asking where your money went?
+                <Typography sx={{ fontSize: { xs: "1.75rem", sm: "2.1rem", md: "2.6rem" }, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+                  Ready to stop guessing where your money goes?
                 </Typography>
-                <Typography color="text.secondary" sx={{ mt: 0.8, maxWidth: 680 }}>
-                  Open SapaTracker now and start tracking today. Small daily visibility prevents big
-                  end-of-month stress.
+                <Typography sx={{ mt: 1, color: alpha("#FFFFFF", 0.9), maxWidth: 700 }}>
+                  Start with one minute of tracking today. Small daily visibility prevents big
+                  monthly stress.
                 </Typography>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Stack direction={{ xs: "column", sm: "row", md: "column" }} spacing={1}>
-                  <Button variant="contained" color="primary" href={OPEN_APP_URL} fullWidth>
+                <Stack direction={{ xs: "column", sm: "row" }} spacing={1} sx={{ mt: 2 }}>
+                  <Button
+                    variant="contained"
+                    href={OPEN_APP_URL}
+                    sx={{ bgcolor: "common.white", color: "text.primary", "&:hover": { bgcolor: "#ECECEC" } }}
+                  >
                     Open App
                   </Button>
-                  <Button variant="contained" color="secondary" href={APK_DOWNLOAD_URL} fullWidth>
+                  <Button
+                    variant="outlined"
+                    href={APK_DOWNLOAD_URL}
+                    sx={{
+                      borderColor: alpha("#FFFFFF", 0.82),
+                      color: "common.white",
+                      "&:hover": { borderColor: "common.white", bgcolor: alpha("#FFFFFF", 0.14) },
+                    }}
+                  >
                     Download Android APK
                   </Button>
                 </Stack>
+              </Grid>
+              <Grid item xs={12} md={4}>
                 <Box
                   component="img"
                   src={androidAppInstallImg}
                   alt="SapaTracker Android app installation"
                   sx={{
-                    mt: 1.2,
                     width: "100%",
-                    borderRadius: 2,
-                    height: { xs: 150, sm: 170, md: 190 },
+                    borderRadius: 4,
+                    height: { xs: 190, md: 220 },
                     objectFit: "cover",
                     border: "1px solid",
-                    borderColor: "divider",
+                    borderColor: alpha("#FFFFFF", 0.35),
                   }}
                 />
               </Grid>
@@ -659,27 +659,27 @@ function App() {
       <Box
         component="footer"
         sx={{
-          mt: { xs: 4, md: 5 },
+          mt: { xs: 3, md: 4 },
           borderTop: "1px solid",
-          borderColor: "divider",
-          bgcolor: alpha("#FFFFFF", 0.65),
+          borderColor: alpha("#1D1D1F", 0.12),
+          bgcolor: alpha("#FFFFFF", 0.72),
         }}
       >
         <Container
-          maxWidth="lg"
+          maxWidth="xl"
           sx={{
             py: 2.8,
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
-            gap: 1.3,
+            gap: 1,
             justifyContent: "space-between",
             alignItems: { xs: "flex-start", md: "center" },
           }}
         >
           <Typography variant="body2" color="text.secondary">
-            © {year} SapaTracker. All rights reserved.
+            (c) {year} SapaTracker. All rights reserved.
           </Typography>
-          <Stack direction="row" spacing={1.2} useFlexGap flexWrap="wrap">
+          <Stack direction="row" spacing={0.6} useFlexGap flexWrap="wrap">
             <Button href="#features" color="inherit" size="small" sx={{ color: "text.secondary" }}>
               Features
             </Button>

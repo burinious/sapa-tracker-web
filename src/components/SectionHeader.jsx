@@ -2,14 +2,14 @@ import { Stack, Typography } from "@mui/material";
 
 function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
   return (
-    <Stack spacing={1.2} sx={{ maxWidth: 740, mx: align === "center" ? "auto" : 0 }}>
+    <Stack spacing={1.25} sx={{ maxWidth: 820, mx: align === "center" ? "auto" : 0 }}>
       {eyebrow ? (
         <Typography
           variant="overline"
           sx={{
-            color: "primary.main",
-            fontWeight: 800,
-            letterSpacing: "0.1em",
+            color: "text.secondary",
+            fontWeight: 600,
+            letterSpacing: "0.08em",
             textTransform: "uppercase",
           }}
           align={align}
@@ -20,8 +20,9 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
       <Typography
         component="h2"
         sx={{
-          fontSize: { xs: "1.6rem", sm: "2rem", md: "2.35rem" },
-          lineHeight: 1.15,
+          fontSize: { xs: "1.9rem", sm: "2.4rem", md: "3.15rem" },
+          lineHeight: 1.08,
+          letterSpacing: "-0.03em",
         }}
         align={align}
       >
@@ -32,7 +33,7 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
           variant="body1"
           color="text.secondary"
           align={align}
-          sx={{ fontSize: { xs: "0.98rem", sm: "1.04rem" } }}
+          sx={{ fontSize: { xs: "1rem", sm: "1.1rem" }, maxWidth: 660, mx: align === "center" ? "auto" : 0 }}
         >
           {subtitle}
         </Typography>

@@ -1,3 +1,4 @@
+import { alpha } from "@mui/material/styles";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 
 function FeatureCard({ icon, title, description }) {
@@ -5,10 +6,13 @@ function FeatureCard({ icon, title, description }) {
     <Card
       sx={{
         height: "100%",
-        transition: "transform 180ms ease, box-shadow 200ms ease",
+        transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
+        backgroundColor: alpha("#FFFFFF", 0.84),
+        backdropFilter: "blur(8px)",
         "&:hover": {
-          transform: "translateY(-3px)",
-          boxShadow: "0 16px 34px rgba(23,35,32,0.1)",
+          transform: "translateY(-4px)",
+          boxShadow: "0 20px 45px rgba(0, 0, 0, 0.12)",
+          borderColor: "rgba(0, 113, 227, 0.32)",
         },
       }}
     >
@@ -19,15 +23,15 @@ function FeatureCard({ icon, title, description }) {
             height: 42,
             display: "grid",
             placeItems: "center",
-            borderRadius: "12px",
-            bgcolor: "rgba(17, 106, 100, 0.11)",
-            color: "primary.main",
+            borderRadius: "999px",
+            bgcolor: "rgba(0, 113, 227, 0.1)",
+            color: "primary.dark",
             mb: 1.3,
           }}
         >
           {icon}
         </Box>
-        <Typography variant="h6" sx={{ fontSize: "1.02rem", mb: 0.6 }}>
+        <Typography variant="h6" sx={{ fontSize: "1.08rem", mb: 0.6, letterSpacing: "-0.02em" }}>
           {title}
         </Typography>
         <Typography color="text.secondary" sx={{ fontSize: "0.95rem", lineHeight: 1.6 }}>
