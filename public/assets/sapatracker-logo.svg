@@ -1,0 +1,33 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="32" y1="24" x2="224" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#27A38F"/>
+      <stop offset="1" stop-color="#0E5D57"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="84" y1="52" x2="198" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD182"/>
+      <stop offset="1" stop-color="#F08B1E"/>
+    </linearGradient>
+    <filter id="softShadow" x="16" y="16" width="224" height="224" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="10"/>
+      <feGaussianBlur stdDeviation="8"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.054 0 0 0 0 0.204 0 0 0 0 0.192 0 0 0 0.28 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4001_10"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4001_10" result="shape"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <rect x="32" y="24" width="192" height="192" rx="44" fill="url(#bgGradient)"/>
+    <rect x="54" y="46" width="148" height="148" rx="32" fill="white" fill-opacity="0.08"/>
+
+    <path d="M92 94C92 80.7452 102.745 70 116 70H173C179.075 70 184 74.9249 184 81C184 87.0751 179.075 92 173 92H116C114.895 92 114 92.8954 114 94V95.6C114 97.3686 115.437 98.8 117.21 98.8H150.4C169.509 98.8 185 114.291 185 133.4V135C185 149.359 173.359 161 159 161H97C90.9249 161 86 156.075 86 150C86 143.925 90.9249 139 97 139H159C161.15 139 162.9 137.25 162.9 135.1V133.6C162.9 131.832 161.468 130.4 159.7 130.4H126.6C107.491 130.4 92 114.909 92 95.8V94Z" fill="white"/>
+
+    <path d="M152 72L192 72L192 112" stroke="url(#accentGradient)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M191.5 72.5L133 131" stroke="url(#accentGradient)" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="132.5" cy="131.5" r="11.5" fill="url(#accentGradient)"/>
+  </g>
+</svg>
