@@ -1,0 +1,20 @@
+{
+  "name": "SapaTracker",
+  "short_name": "SapaTracker",
+  "description": "Track spending, monitor income, and stay in control with SapaTracker.",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0071E3",
+  "background_color": "#F5F5F7",
+  "display": "standalone"
+}
