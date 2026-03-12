@@ -1,66 +1,82 @@
 import { alpha, createTheme } from "@mui/material/styles";
+import {
+  COLORS,
+  RADIUS,
+  SHADOWS,
+  TYPOGRAPHY,
+  MOTION,
+} from "./designSystem";
 
 export const appTheme = createTheme({
   palette: {
     primary: {
-      main: "#0071E3",
-      dark: "#005BB5",
-      light: "#3B91EC",
+      main: COLORS.primary,
+      dark: COLORS.primaryDark,
+      light: COLORS.primaryLight,
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#1D1D1F",
+      main: COLORS.baseDark,
       dark: "#000000",
-      light: "#333336",
+      light: COLORS.baseDarkSoft,
       contrastText: "#FFFFFF",
     },
     background: {
-      default: "#F5F5F7",
-      paper: "#FFFFFF",
+      default: COLORS.backgroundDefault,
+      paper: COLORS.surface,
     },
     text: {
-      primary: "#1D1D1F",
-      secondary: "#6E6E73",
+      primary: COLORS.baseDark,
+      secondary: COLORS.textSecondary,
     },
     success: {
-      main: "#2F9E44",
+      main: COLORS.success,
     },
-    divider: "#D2D2D7",
+    divider: COLORS.divider,
   },
   shape: {
-    borderRadius: 24,
+    borderRadius: RADIUS.base,
   },
   typography: {
-    fontFamily:
-      '"SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: TYPOGRAPHY.fontFamily,
     h1: {
-      fontWeight: 700,
+      fontWeight: TYPOGRAPHY.heroTitle.weight,
       letterSpacing: "-0.03em",
     },
     h2: {
-      fontWeight: 700,
+      fontWeight: TYPOGRAPHY.sectionTitle.weight,
       letterSpacing: "-0.02em",
     },
     h3: {
       fontWeight: 600,
     },
     button: {
-      fontWeight: 500,
+      fontWeight: TYPOGRAPHY.button.weight,
       textTransform: "none",
-      letterSpacing: "-0.01em",
+      letterSpacing: TYPOGRAPHY.button.letterSpacing,
     },
   },
   components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: alpha(theme.palette.background.default, 0.72),
+          backdropFilter: "blur(12px)",
+          borderBottom: `1px solid ${alpha(theme.palette.secondary.main, 0.1)}`,
+          boxShadow: "none",
+        }),
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderRadius: 999,
+          borderRadius: RADIUS.pill,
           paddingInline: theme.spacing(2.5),
           paddingBlock: theme.spacing(1.1),
-          transition: "transform 180ms ease, box-shadow 180ms ease",
+          transition: MOTION.buttonTransition,
           "&:hover": {
             transform: "translateY(-1px)",
-            boxShadow: `0 12px 28px ${alpha(theme.palette.secondary.main, 0.18)}`,
+            boxShadow: SHADOWS.buttonHover,
           },
           "&.Mui-disabled": {
             opacity: 0.65,
@@ -76,9 +92,9 @@ export const appTheme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderRadius: 28,
+          borderRadius: RADIUS.card,
           border: `1px solid ${theme.palette.divider}`,
-          boxShadow: "0 12px 42px rgba(0, 0, 0, 0.06)",
+          boxShadow: SHADOWS.card,
           backgroundImage: "none",
         }),
       },
@@ -87,7 +103,7 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 20,
+          borderRadius: RADIUS.accordion,
           boxShadow: "none",
           backgroundColor: alpha(theme.palette.common.white, 0.82),
           "&:before": {

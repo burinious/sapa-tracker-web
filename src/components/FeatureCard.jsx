@@ -1,18 +1,19 @@
 import { alpha } from "@mui/material/styles";
 import { Box, Card, CardContent, Typography } from "@mui/material";
+import { COLORS, MOTION, SHADOWS } from "../designSystem";
 
 function FeatureCard({ icon, title, description }) {
   return (
     <Card
       sx={{
         height: "100%",
-        transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
-        backgroundColor: alpha("#FFFFFF", 0.84),
+        transition: MOTION.cardTransition,
+        backgroundColor: alpha(COLORS.surface, 0.84),
         backdropFilter: "blur(8px)",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 20px 45px rgba(0, 0, 0, 0.12)",
-          borderColor: "rgba(0, 113, 227, 0.32)",
+          boxShadow: SHADOWS.cardHover,
+          borderColor: alpha(COLORS.primary, 0.32),
         },
       }}
     >
@@ -24,7 +25,7 @@ function FeatureCard({ icon, title, description }) {
             display: "grid",
             placeItems: "center",
             borderRadius: "999px",
-            bgcolor: "rgba(0, 113, 227, 0.1)",
+            bgcolor: alpha(COLORS.primary, 0.1),
             color: "primary.dark",
             mb: 1.3,
           }}

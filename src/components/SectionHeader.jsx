@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import { TYPOGRAPHY } from "../designSystem";
 
 function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
   return (
@@ -8,8 +9,8 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
           variant="overline"
           sx={{
             color: "text.secondary",
-            fontWeight: 600,
-            letterSpacing: "0.08em",
+            fontWeight: TYPOGRAPHY.overline.weight,
+            letterSpacing: TYPOGRAPHY.overline.letterSpacing,
             textTransform: "uppercase",
           }}
           align={align}
@@ -20,9 +21,9 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
       <Typography
         component="h2"
         sx={{
-          fontSize: { xs: "1.9rem", sm: "2.4rem", md: "3.15rem" },
-          lineHeight: 1.08,
-          letterSpacing: "-0.03em",
+          fontSize: TYPOGRAPHY.sectionTitle.size,
+          lineHeight: TYPOGRAPHY.sectionTitle.lineHeight,
+          letterSpacing: TYPOGRAPHY.sectionTitle.letterSpacing,
         }}
         align={align}
       >

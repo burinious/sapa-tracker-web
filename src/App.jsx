@@ -31,6 +31,13 @@ import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
 import SectionHeader from "./components/SectionHeader";
 import FeatureCard from "./components/FeatureCard";
+import {
+  BACKGROUNDS,
+  COLORS,
+  MOTION,
+  SPACING,
+  TYPOGRAPHY,
+} from "./designSystem";
 import incomeReviewStudentImg from "./assets/illustrations/sapatracker-income-review-student.png";
 import dailyExpenseTrackingImg from "./assets/illustrations/sapatracker-daily-expense-tracking.png";
 import spendingInsightsPiechartImg from "./assets/illustrations/sapatracker-spending-insights-piechart.png";
@@ -44,6 +51,7 @@ const APK_DOWNLOAD_URL =
 const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "/privacy";
 const TERMS_URL = import.meta.env.VITE_TERMS_URL || "/terms";
 const LOGO_SRC = "/assets/sapatracker-logo.svg";
+const SECTION_SCROLL_MARGIN = SPACING.scrollMarginTop;
 
 const navLinks = [
   { label: "Overview", href: "#home" },
@@ -274,7 +282,7 @@ function FooterBar({ year }) {
         right: 0,
         bottom: 0,
         borderTop: "1px solid",
-        borderColor: alpha("#1D1D1F", 0.12),
+        borderColor: alpha(COLORS.baseDark, 0.12),
         bgcolor: alpha("#FFFFFF", 0.9),
         backdropFilter: "blur(10px)",
         zIndex: (theme) => theme.zIndex.appBar - 1,
@@ -323,22 +331,21 @@ function LegalPage({ title, sections, year }) {
     <Box
       sx={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(1200px 560px at 50% -14%, rgba(0,113,227,0.13) 0%, rgba(245,245,247,0) 72%), radial-gradient(760px 360px at 50% 108%, rgba(29,29,31,0.08) 0%, rgba(245,245,247,0) 72%), #F5F5F7",
+        background: BACKGROUNDS.page,
       }}
     >
       <AppBar
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: alpha("#F5F5F7", 0.72),
+          bgcolor: alpha(COLORS.backgroundDefault, 0.72),
           backdropFilter: "blur(12px)",
           borderBottom: "1px solid",
-          borderColor: alpha("#1D1D1F", 0.1),
+          borderColor: alpha(COLORS.baseDark, 0.1),
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 74 } }}>
+          <Toolbar disableGutters sx={{ minHeight: SPACING.navHeight }}>
             <Typography sx={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: "1rem", color: "text.primary", flexGrow: 1 }}>
               SapaTracker
             </Typography>
@@ -354,12 +361,12 @@ function LegalPage({ title, sections, year }) {
         </Container>
       </AppBar>
 
-      <Container maxWidth="md" sx={{ pt: { xs: 4, md: 6 }, pb: { xs: 12, md: 13 }, px: { xs: 1.8, sm: 2.4 } }}>
+      <Container maxWidth="md" sx={{ pt: { xs: 4, md: 6 }, pb: SPACING.pagePaddingBottom, px: { xs: 1.8, sm: 2.4 } }}>
         <Chip
           label="Legal"
           sx={{
             borderRadius: "999px",
-            bgcolor: alpha("#0071E3", 0.1),
+            bgcolor: alpha(COLORS.primary, 0.1),
             color: "primary.dark",
             fontWeight: 600,
           }}
@@ -416,22 +423,21 @@ function App() {
     <Box
       sx={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(1200px 560px at 50% -14%, rgba(0,113,227,0.13) 0%, rgba(245,245,247,0) 72%), radial-gradient(760px 360px at 50% 108%, rgba(29,29,31,0.08) 0%, rgba(245,245,247,0) 72%), #F5F5F7",
+        background: BACKGROUNDS.page,
       }}
     >
       <AppBar
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: alpha("#F5F5F7", 0.72),
+          bgcolor: alpha(COLORS.backgroundDefault, 0.72),
           backdropFilter: "blur(12px)",
           borderBottom: "1px solid",
-          borderColor: alpha("#1D1D1F", 0.1),
+          borderColor: alpha(COLORS.baseDark, 0.1),
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 74 } }}>
+          <Toolbar disableGutters sx={{ minHeight: SPACING.navHeight }}>
             <Stack direction="row" spacing={1.1} alignItems="center" sx={{ flexGrow: 1 }}>
               {logoVisible ? (
                 <Box
@@ -459,7 +465,12 @@ function App() {
                 </Box>
               )}
               <Typography
-                sx={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: "1rem", color: "text.primary" }}
+                sx={{
+                  fontWeight: TYPOGRAPHY.navbarBrand.weight,
+                  letterSpacing: TYPOGRAPHY.navbarBrand.letterSpacing,
+                  fontSize: TYPOGRAPHY.navbarBrand.size,
+                  color: "text.primary",
+                }}
               >
                 SapaTracker
               </Typography>
@@ -501,7 +512,7 @@ function App() {
             width: "86%",
             maxWidth: 320,
             p: 1.6,
-            bgcolor: alpha("#F5F5F7", 0.95),
+            bgcolor: alpha(COLORS.backgroundDefault, 0.95),
             backdropFilter: "blur(8px)",
           },
         }}
@@ -536,19 +547,19 @@ function App() {
         </Button>
       </Drawer>
 
-      <Container maxWidth="xl" sx={{ px: { xs: 1.6, sm: 2.4, md: 3.8 }, pb: { xs: 12, md: 13 } }}>
-        <Box component="section" id="home" sx={{ pt: { xs: 5, md: 9 }, pb: { xs: 6, md: 9 } }}>
+      <Container maxWidth="xl" sx={{ px: SPACING.pagePaddingX, pb: SPACING.pagePaddingBottom }}>
+        <Box component="section" id="home" sx={SPACING.sectionHero}>
           <Stack
             spacing={2}
             alignItems="center"
             textAlign="center"
-            sx={{ animation: `${fadeUp} 760ms ease` }}
+            sx={{ animation: `${fadeUp} ${MOTION.fadeUp.duration}ms ${MOTION.fadeUp.easing}` }}
           >
             <Chip
               label="Personal finance, redesigned for daily clarity"
               sx={{
                 borderRadius: "999px",
-                bgcolor: alpha("#0071E3", 0.1),
+                bgcolor: alpha(COLORS.primary, 0.1),
                 color: "primary.dark",
                 fontWeight: 600,
               }}
@@ -556,9 +567,9 @@ function App() {
             <Typography
               component="h1"
               sx={{
-                fontSize: { xs: "2.25rem", sm: "3rem", md: "4.7rem" },
-                lineHeight: { xs: 1.06, md: 0.98 },
-                letterSpacing: "-0.04em",
+                fontSize: TYPOGRAPHY.heroTitle.size,
+                lineHeight: TYPOGRAPHY.heroTitle.lineHeight,
+                letterSpacing: TYPOGRAPHY.heroTitle.letterSpacing,
                 maxWidth: 980,
               }}
             >
@@ -589,7 +600,7 @@ function App() {
               p: { xs: 1.4, md: 1.8 },
               bgcolor: alpha("#FFFFFF", 0.8),
               backdropFilter: "blur(10px)",
-              animation: `${zoomIn} 920ms ease`,
+              animation: `${zoomIn} ${MOTION.zoomIn.duration}ms ${MOTION.zoomIn.easing}`,
             }}
           >
             <Box
@@ -598,7 +609,7 @@ function App() {
                 borderRadius: { xs: 4, md: 6 },
                 overflow: "hidden",
                 border: "1px solid",
-                borderColor: alpha("#1D1D1F", 0.08),
+                borderColor: alpha(COLORS.baseDark, 0.08),
                 bgcolor: "#FFFFFF",
               }}
             >
@@ -616,8 +627,7 @@ function App() {
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.02) 35%, rgba(0,0,0,0.16) 100%)",
+                  background: BACKGROUNDS.mediaOverlay,
                 }}
               />
             </Box>
@@ -651,7 +661,7 @@ function App() {
         <Box
           component="section"
           id="features"
-          sx={{ py: { xs: 6, md: 9 }, scrollMarginTop: "94px" }}
+          sx={{ py: SPACING.sectionLg, scrollMarginTop: SECTION_SCROLL_MARGIN }}
         >
           <SectionHeader
             align="center"
@@ -671,7 +681,7 @@ function App() {
         <Box
           component="section"
           id="how-it-works"
-          sx={{ py: { xs: 6, md: 9 }, scrollMarginTop: "94px" }}
+          sx={{ py: SPACING.sectionLg, scrollMarginTop: SECTION_SCROLL_MARGIN }}
         >
           <SectionHeader
             align="center"
@@ -685,7 +695,7 @@ function App() {
                 <Card sx={{ height: "100%", p: { xs: 2.2, md: 2.8 }, bgcolor: alpha("#FFFFFF", 0.8) }}>
                   <Typography
                     sx={{
-                      color: alpha("#1D1D1F", 0.32),
+                      color: alpha(COLORS.baseDark, 0.32),
                       fontWeight: 700,
                       letterSpacing: "-0.05em",
                       fontSize: { xs: "2.1rem", md: "2.6rem" },
@@ -704,7 +714,7 @@ function App() {
           </Grid>
         </Box>
 
-        <Box component="section" sx={{ py: { xs: 6, md: 9 }, scrollMarginTop: "94px" }}>
+        <Box component="section" sx={{ py: SPACING.sectionLg, scrollMarginTop: SECTION_SCROLL_MARGIN }}>
           <SectionHeader
             align="center"
             eyebrow="Demo Screens"
@@ -741,14 +751,14 @@ function App() {
           </Grid>
         </Box>
 
-        <Box component="section" sx={{ py: { xs: 6, md: 8 }, scrollMarginTop: "94px" }}>
+        <Box component="section" sx={{ py: SPACING.sectionMd, scrollMarginTop: SECTION_SCROLL_MARGIN }}>
           <Grid container spacing={1.8} alignItems="stretch">
             <Grid item xs={12} md={5}>
               <Card
                 sx={{
                   height: "100%",
                   p: { xs: 2.2, md: 2.8 },
-                  bgcolor: "#1D1D1F",
+                  bgcolor: COLORS.baseDark,
                   color: "common.white",
                   borderColor: alpha("#FFFFFF", 0.16),
                 }}
@@ -766,7 +776,7 @@ function App() {
                     "Session controls to reduce unauthorized access risk",
                   ].map((item) => (
                     <Stack key={item} direction="row" spacing={1} alignItems="center">
-                      <CheckCircleRoundedIcon sx={{ color: "#66A6FF", fontSize: "1.1rem" }} />
+                      <CheckCircleRoundedIcon sx={{ color: COLORS.securityBlue, fontSize: "1.1rem" }} />
                       <Typography sx={{ color: alpha("#FFFFFF", 0.84) }}>{item}</Typography>
                     </Stack>
                   ))}
@@ -804,7 +814,7 @@ function App() {
         <Box
           component="section"
           id="faq"
-          sx={{ py: { xs: 6, md: 8 }, scrollMarginTop: "94px" }}
+          sx={{ py: SPACING.sectionMd, scrollMarginTop: SECTION_SCROLL_MARGIN }}
         >
           <SectionHeader
             align="center"
@@ -828,12 +838,11 @@ function App() {
           </Box>
         </Box>
 
-        <Box component="section" id="download" sx={{ py: { xs: 5, md: 7 }, scrollMarginTop: "94px" }}>
+        <Box component="section" id="download" sx={{ py: SPACING.sectionSm, scrollMarginTop: SECTION_SCROLL_MARGIN }}>
           <Card
             sx={{
               p: { xs: 2.2, md: 3.4 },
-              background:
-                "linear-gradient(140deg, rgba(0,113,227,0.96) 0%, rgba(38,130,230,0.96) 46%, rgba(100,168,238,0.96) 100%)",
+              background: BACKGROUNDS.cta,
               color: "common.white",
               borderColor: alpha("#FFFFFF", 0.32),
             }}
