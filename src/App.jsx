@@ -718,7 +718,6 @@ function App() {
         <Box component="section" sx={{ py: SPACING.sectionLg, scrollMarginTop: SECTION_SCROLL_MARGIN }}>
           <SectionHeader
             align="center"
-            eyebrow="Demo Screens"
             title="See your money with less friction"
             subtitle="A clean interface for quick entries, clear insights, and confident spending decisions."
           />
