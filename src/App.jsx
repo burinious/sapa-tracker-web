@@ -28,6 +28,7 @@ import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import DownloadForOfflineRoundedIcon from "@mui/icons-material/DownloadForOfflineRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
 import SectionHeader from "./components/SectionHeader";
 import FeatureCard from "./components/FeatureCard";
 import incomeReviewStudentImg from "./assets/illustrations/sapatracker-income-review-student.png";
@@ -40,8 +41,8 @@ import androidAppInstallImg from "./assets/illustrations/sapatracker-android-app
 const OPEN_APP_URL = import.meta.env.VITE_OPEN_APP_URL || "/";
 const APK_DOWNLOAD_URL =
   import.meta.env.VITE_APK_DOWNLOAD_URL || "/downloads/sapatracker-android.apk";
-const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "#";
-const TERMS_URL = import.meta.env.VITE_TERMS_URL || "#";
+const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "/privacy";
+const TERMS_URL = import.meta.env.VITE_TERMS_URL || "/terms";
 const LOGO_SRC = "/assets/sapatracker-logo.svg";
 
 const navLinks = [
@@ -88,6 +89,12 @@ const features = [
     title: "Android APK delivery",
     description:
       "Launch quickly on mobile with a direct APK install flow designed for low-friction onboarding.",
+  },
+  {
+    icon: <NotificationsActiveRoundedIcon fontSize="small" />,
+    title: "Budget alert reminders",
+    description:
+      "Get gentle reminders before category spending crosses your weekly limit so you can adjust early.",
   },
 ];
 
@@ -155,6 +162,86 @@ const demoScreens = [
   },
 ];
 
+const LEGAL_LAST_UPDATED = "March 12, 2026";
+
+const privacySections = [
+  {
+    title: "Information We Collect",
+    body: "We collect the minimum details needed to run SapaTracker safely and reliably.",
+    bullets: [
+      "Account profile details such as name, email address, and authentication identifiers.",
+      "Transaction entries you create, including income and expense records.",
+      "Basic technical diagnostics used to improve performance and security.",
+    ],
+  },
+  {
+    title: "How We Use Data",
+    body: "Your information is used strictly for product functionality and service quality.",
+    bullets: [
+      "To show balances, category insights, and spending trends inside your account.",
+      "To secure sign-in flows and prevent unauthorized access.",
+      "To support troubleshooting, fraud prevention, and feature improvement.",
+    ],
+  },
+  {
+    title: "Data Protection",
+    body: "We apply standard safeguards to keep account data protected in transit and at rest.",
+    bullets: [
+      "Encrypted transport channels for network communication.",
+      "Access controls that limit who can view internal systems.",
+      "Session security checks to reduce account compromise risk.",
+    ],
+  },
+  {
+    title: "Your Choices",
+    body: "You can request account updates or deletion through official support channels.",
+    bullets: [
+      "You may update profile details at any time within the app.",
+      "You may request account deletion and data removal where applicable.",
+      "You may stop using the service at any time.",
+    ],
+  },
+];
+
+const termsSections = [
+  {
+    title: "Acceptance of Terms",
+    body: "By using SapaTracker, you agree to these Terms and our Privacy Policy.",
+    bullets: [
+      "You must provide accurate information when creating an account.",
+      "You are responsible for activities under your account credentials.",
+      "You should keep login information confidential and secure.",
+    ],
+  },
+  {
+    title: "Permitted Use",
+    body: "SapaTracker is provided for lawful personal finance tracking and planning.",
+    bullets: [
+      "Do not misuse the service, attempt unauthorized access, or disrupt operations.",
+      "Do not upload harmful, fraudulent, or unlawful content.",
+      "Do not reverse engineer or exploit the product infrastructure.",
+    ],
+  },
+  {
+    title: "Service Availability",
+    body: "We aim for reliable uptime but cannot guarantee uninterrupted availability.",
+    bullets: [
+      "Maintenance, upgrades, or third-party issues may temporarily affect access.",
+      "Feature sets may evolve over time to improve quality and security.",
+      "We may suspend accounts involved in abuse or policy violations.",
+    ],
+  },
+  {
+    title: "Limitation and Updates",
+    body: "SapaTracker is offered on an as-is basis within applicable legal limits.",
+    bullets: [
+      "You remain responsible for personal financial decisions and outcomes.",
+      "We may update these Terms from time to time with revised effective dates.",
+      "Continued use after updates indicates acceptance of the revised Terms.",
+    ],
+  },
+];
+
 const fadeUp = keyframes`
   from {
     opacity: 0;
@@ -177,10 +264,153 @@ const zoomIn = keyframes`
   }
 `;
 
+function FooterBar({ year }) {
+  return (
+    <Box
+      component="footer"
+      sx={{
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderTop: "1px solid",
+        borderColor: alpha("#1D1D1F", 0.12),
+        bgcolor: alpha("#FFFFFF", 0.9),
+        backdropFilter: "blur(10px)",
+        zIndex: (theme) => theme.zIndex.appBar - 1,
+      }}
+    >
+      <Container
+        maxWidth="xl"
+        sx={{
+          py: 0.8,
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          gap: 0.4,
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+        }}
+      >
+        <Typography variant="caption" color="text.secondary">
+          (c) {year} SapaTracker
+        </Typography>
+        <Stack direction="row" spacing={0.35} useFlexGap flexWrap="wrap">
+          <Button href="/#features" color="inherit" size="small" sx={{ color: "text.secondary", minWidth: 0, px: 1 }}>
+            Features
+          </Button>
+          <Button href="/#faq" color="inherit" size="small" sx={{ color: "text.secondary", minWidth: 0, px: 1 }}>
+            FAQ
+          </Button>
+          <Button
+            href={PRIVACY_POLICY_URL}
+            color="inherit"
+            size="small"
+            sx={{ color: "text.secondary", minWidth: 0, px: 1 }}
+          >
+            Privacy
+          </Button>
+          <Button href={TERMS_URL} color="inherit" size="small" sx={{ color: "text.secondary", minWidth: 0, px: 1 }}>
+            Terms
+          </Button>
+        </Stack>
+      </Container>
+    </Box>
+  );
+}
+
+function LegalPage({ title, sections, year }) {
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        background:
+          "radial-gradient(1200px 560px at 50% -14%, rgba(0,113,227,0.13) 0%, rgba(245,245,247,0) 72%), radial-gradient(760px 360px at 50% 108%, rgba(29,29,31,0.08) 0%, rgba(245,245,247,0) 72%), #F5F5F7",
+      }}
+    >
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{
+          bgcolor: alpha("#F5F5F7", 0.72),
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid",
+          borderColor: alpha("#1D1D1F", 0.1),
+        }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 74 } }}>
+            <Typography sx={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: "1rem", color: "text.primary", flexGrow: 1 }}>
+              SapaTracker
+            </Typography>
+            <Stack direction="row" spacing={0.6} alignItems="center">
+              <Button href="/#home" color="inherit" sx={{ color: "text.secondary" }}>
+                Home
+              </Button>
+              <Button variant="contained" href={OPEN_APP_URL}>
+                Open App
+              </Button>
+            </Stack>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Container maxWidth="md" sx={{ pt: { xs: 4, md: 6 }, pb: { xs: 12, md: 13 }, px: { xs: 1.8, sm: 2.4 } }}>
+        <Chip
+          label="Legal"
+          sx={{
+            borderRadius: "999px",
+            bgcolor: alpha("#0071E3", 0.1),
+            color: "primary.dark",
+            fontWeight: 600,
+          }}
+        />
+        <Typography component="h1" sx={{ mt: 1.4, fontSize: { xs: "2rem", md: "2.9rem" }, lineHeight: 1.05, letterSpacing: "-0.03em" }}>
+          {title}
+        </Typography>
+        <Typography color="text.secondary" sx={{ mt: 0.8 }}>
+          Last updated: {LEGAL_LAST_UPDATED}
+        </Typography>
+
+        <Stack spacing={1.3} sx={{ mt: 2.4 }}>
+          {sections.map((section) => (
+            <Card key={section.title} sx={{ p: { xs: 1.7, md: 2.2 }, bgcolor: alpha("#FFFFFF", 0.84) }}>
+              <Typography sx={{ fontWeight: 700, letterSpacing: "-0.02em", mb: 0.6 }}>{section.title}</Typography>
+              <Typography color="text.secondary" sx={{ mb: 0.7 }}>
+                {section.body}
+              </Typography>
+              <Box component="ul" sx={{ m: 0, pl: 2.2, color: "text.secondary" }}>
+                {section.bullets.map((item) => (
+                  <Box component="li" key={item} sx={{ mb: 0.45, lineHeight: 1.55 }}>
+                    {item}
+                  </Box>
+                ))}
+              </Box>
+            </Card>
+          ))}
+        </Stack>
+      </Container>
+
+      <FooterBar year={year} />
+    </Box>
+  );
+}
+
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [logoVisible, setLogoVisible] = useState(true);
   const year = useMemo(() => new Date().getFullYear(), []);
+  const normalizedPath =
+    (typeof window !== "undefined" ? window.location.pathname : "/").replace(/\/+$/, "") || "/";
+  const isPrivacyPage = normalizedPath === "/privacy";
+  const isTermsPage = normalizedPath === "/terms" || normalizedPath === "/terms-and-conditions";
+
+  if (isPrivacyPage) {
+    return <LegalPage title="Privacy Policy" sections={privacySections} year={year} />;
+  }
+
+  if (isTermsPage) {
+    return <LegalPage title="Terms and Conditions" sections={termsSections} year={year} />;
+  }
 
   return (
     <Box
@@ -228,7 +458,9 @@ function App() {
                   ST
                 </Box>
               )}
-              <Typography sx={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: "1rem" }}>
+              <Typography
+                sx={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: "1rem", color: "text.primary" }}
+              >
                 SapaTracker
               </Typography>
             </Stack>
@@ -304,7 +536,7 @@ function App() {
         </Button>
       </Drawer>
 
-      <Container maxWidth="xl" sx={{ px: { xs: 1.6, sm: 2.4, md: 3.8 } }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 1.6, sm: 2.4, md: 3.8 }, pb: { xs: 12, md: 13 } }}>
         <Box component="section" id="home" sx={{ pt: { xs: 5, md: 9 }, pb: { xs: 6, md: 9 } }}>
           <Stack
             spacing={2}
@@ -656,50 +888,7 @@ function App() {
         </Box>
       </Container>
 
-      <Box
-        component="footer"
-        sx={{
-          mt: { xs: 3, md: 4 },
-          borderTop: "1px solid",
-          borderColor: alpha("#1D1D1F", 0.12),
-          bgcolor: alpha("#FFFFFF", 0.72),
-        }}
-      >
-        <Container
-          maxWidth="xl"
-          sx={{
-            py: 2.8,
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 1,
-            justifyContent: "space-between",
-            alignItems: { xs: "flex-start", md: "center" },
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            (c) {year} SapaTracker. All rights reserved.
-          </Typography>
-          <Stack direction="row" spacing={0.6} useFlexGap flexWrap="wrap">
-            <Button href="#features" color="inherit" size="small" sx={{ color: "text.secondary" }}>
-              Features
-            </Button>
-            <Button href="#faq" color="inherit" size="small" sx={{ color: "text.secondary" }}>
-              FAQ
-            </Button>
-            <Button
-              href={PRIVACY_POLICY_URL}
-              color="inherit"
-              size="small"
-              sx={{ color: "text.secondary" }}
-            >
-              Privacy Policy
-            </Button>
-            <Button href={TERMS_URL} color="inherit" size="small" sx={{ color: "text.secondary" }}>
-              Terms
-            </Button>
-          </Stack>
-        </Container>
-      </Box>
+      <FooterBar year={year} />
     </Box>
   );
 }
