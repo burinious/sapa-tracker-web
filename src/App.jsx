@@ -293,16 +293,17 @@ function FooterBar({ year }) {
         sx={{
           py: 0.8,
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
+          flexDirection: "column",
           gap: 0.4,
-          justifyContent: "space-between",
-          alignItems: { xs: "flex-start", sm: "center" },
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
         }}
       >
         <Typography variant="caption" color="text.secondary">
           (c) {year} SapaTracker
         </Typography>
-        <Stack direction="row" spacing={0.35} useFlexGap flexWrap="wrap">
+        <Stack direction="row" spacing={0.35} useFlexGap flexWrap="wrap" justifyContent="center">
           <Button href="/#features" color="inherit" size="small" sx={{ color: "text.secondary", minWidth: 0, px: 1 }}>
             Features
           </Button>
