@@ -8,10 +8,15 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
         <Typography
           variant="overline"
           sx={{
-            color: "text.secondary",
+            color: "primary.dark",
             fontWeight: TYPOGRAPHY.overline.weight,
             letterSpacing: TYPOGRAPHY.overline.letterSpacing,
             textTransform: "uppercase",
+            alignSelf: align === "center" ? "center" : "flex-start",
+            px: 1.2,
+            py: 0.45,
+            borderRadius: "999px",
+            bgcolor: "rgba(0, 113, 227, 0.08)",
           }}
           align={align}
         >
@@ -24,6 +29,8 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
           fontSize: TYPOGRAPHY.sectionTitle.size,
           lineHeight: TYPOGRAPHY.sectionTitle.lineHeight,
           letterSpacing: TYPOGRAPHY.sectionTitle.letterSpacing,
+          maxWidth: 760,
+          mx: align === "center" ? "auto" : 0,
         }}
         align={align}
       >

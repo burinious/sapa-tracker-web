@@ -1,5 +1,4 @@
-Place your Android APK in this folder with this exact filename:
-sapatracker-android.apk
+APK downloads now point to the GitHub release artifact:
+https://github.com/burinious/sapa-tracker/releases/download/android-latest/sapatracker.apk
 
-It will then be served at:
-/downloads/sapatracker-android.apk
+If you switch back to hosting the APK from this project later, update `VITE_APK_DOWNLOAD_URL`.

@@ -2,14 +2,17 @@ export const COLORS = {
   primary: "#0071E3",
   primaryDark: "#005BB5",
   primaryLight: "#3B91EC",
+  primaryTint: "#E8F2FF",
   baseDark: "#1D1D1F",
   baseDarkSoft: "#333336",
   textSecondary: "#6E6E73",
   backgroundDefault: "#F5F5F7",
   surface: "#FFFFFF",
+  surfaceMuted: "#FBFBFD",
   divider: "#D2D2D7",
   success: "#2F9E44",
   securityBlue: "#66A6FF",
+  accentWarm: "#FFB15C",
 };
 
 export const TYPOGRAPHY = {
@@ -55,9 +58,9 @@ export const RADIUS = {
 };
 
 export const SHADOWS = {
-  card: "0 12px 42px rgba(0, 0, 0, 0.06)",
-  cardHover: "0 20px 45px rgba(0, 0, 0, 0.12)",
-  buttonHover: "0 12px 28px rgba(29, 29, 31, 0.18)",
+  card: "0 18px 50px rgba(17, 24, 39, 0.08)",
+  cardHover: "0 26px 60px rgba(17, 24, 39, 0.14)",
+  buttonHover: "0 16px 34px rgba(29, 29, 31, 0.16)",
 };
 
 export const MOTION = {
@@ -69,9 +72,9 @@ export const MOTION = {
 
 export const BACKGROUNDS = {
   page:
-    "radial-gradient(1200px 560px at 50% -14%, rgba(0,113,227,0.13) 0%, rgba(245,245,247,0) 72%), radial-gradient(760px 360px at 50% 108%, rgba(29,29,31,0.08) 0%, rgba(245,245,247,0) 72%), #F5F5F7",
+    "radial-gradient(980px 500px at 10% -8%, rgba(0,113,227,0.16) 0%, rgba(245,245,247,0) 72%), radial-gradient(860px 520px at 92% 8%, rgba(255,177,92,0.16) 0%, rgba(245,245,247,0) 68%), radial-gradient(760px 360px at 50% 108%, rgba(29,29,31,0.08) 0%, rgba(245,245,247,0) 72%), linear-gradient(180deg, #F7F8FB 0%, #F3F4F7 100%)",
   mediaOverlay:
-    "linear-gradient(180deg, rgba(255,255,255,0.02) 35%, rgba(0,0,0,0.16) 100%)",
+    "linear-gradient(180deg, rgba(255,255,255,0.04) 18%, rgba(0,0,0,0.22) 100%)",
   cta:
-    "linear-gradient(140deg, rgba(0,113,227,0.96) 0%, rgba(38,130,230,0.96) 46%, rgba(100,168,238,0.96) 100%)",
+    "linear-gradient(135deg, rgba(9,78,158,0.98) 0%, rgba(0,113,227,0.96) 44%, rgba(90,159,236,0.94) 100%)",
 };

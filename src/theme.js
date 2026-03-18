@@ -60,9 +60,9 @@ export const appTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor: alpha(theme.palette.background.default, 0.72),
-          backdropFilter: "blur(12px)",
-          borderBottom: `1px solid ${alpha(theme.palette.secondary.main, 0.1)}`,
+          backgroundColor: alpha(theme.palette.background.default, 0.76),
+          backdropFilter: "blur(18px)",
+          borderBottom: `1px solid ${alpha(theme.palette.secondary.main, 0.08)}`,
           boxShadow: "none",
         }),
       },
@@ -74,6 +74,7 @@ export const appTheme = createTheme({
           paddingInline: theme.spacing(2.5),
           paddingBlock: theme.spacing(1.1),
           transition: MOTION.buttonTransition,
+          boxShadow: "none",
           "&:hover": {
             transform: "translateY(-1px)",
             boxShadow: SHADOWS.buttonHover,
@@ -93,7 +94,7 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           borderRadius: RADIUS.card,
-          border: `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${alpha(theme.palette.secondary.main, 0.08)}`,
           boxShadow: SHADOWS.card,
           backgroundImage: "none",
         }),
@@ -102,7 +103,7 @@ export const appTheme = createTheme({
     MuiAccordion: {
       styleOverrides: {
         root: ({ theme }) => ({
-          border: `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${alpha(theme.palette.secondary.main, 0.08)}`,
           borderRadius: RADIUS.accordion,
           boxShadow: "none",
           backgroundColor: alpha(theme.palette.common.white, 0.82),

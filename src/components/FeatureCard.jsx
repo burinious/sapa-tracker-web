@@ -7,11 +7,20 @@ function FeatureCard({ icon, title, description }) {
     <Card
       sx={{
         height: "100%",
+        position: "relative",
+        overflow: "hidden",
         transition: MOTION.cardTransition,
         backgroundColor: alpha(COLORS.surface, 0.84),
         backdropFilter: "blur(8px)",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          inset: "0 0 auto 0",
+          height: 4,
+          background: `linear-gradient(90deg, ${alpha(COLORS.primary, 0.88)} 0%, ${alpha(COLORS.accentWarm, 0.7)} 100%)`,
+        },
         "&:hover": {
-          transform: "translateY(-4px)",
+          transform: "translateY(-6px)",
           boxShadow: SHADOWS.cardHover,
           borderColor: alpha(COLORS.primary, 0.32),
         },
@@ -25,14 +34,15 @@ function FeatureCard({ icon, title, description }) {
             display: "grid",
             placeItems: "center",
             borderRadius: "999px",
-            bgcolor: alpha(COLORS.primary, 0.1),
+            bgcolor: alpha(COLORS.primary, 0.12),
             color: "primary.dark",
-            mb: 1.3,
+            mb: 1.5,
+            boxShadow: `inset 0 0 0 1px ${alpha(COLORS.primary, 0.08)}`,
           }}
         >
           {icon}
         </Box>
-        <Typography variant="h6" sx={{ fontSize: "1.08rem", mb: 0.6, letterSpacing: "-0.02em" }}>
+        <Typography variant="h6" sx={{ fontSize: "1.08rem", mb: 0.7, letterSpacing: "-0.02em" }}>
           {title}
         </Typography>
         <Typography color="text.secondary" sx={{ fontSize: "0.95rem", lineHeight: 1.6 }}>

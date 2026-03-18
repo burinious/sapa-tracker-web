@@ -47,7 +47,8 @@ import androidAppInstallImg from "./assets/illustrations/sapatracker-android-app
 
 const OPEN_APP_URL = import.meta.env.VITE_OPEN_APP_URL || "/";
 const APK_DOWNLOAD_URL =
-  import.meta.env.VITE_APK_DOWNLOAD_URL || "/downloads/sapatracker-android.apk";
+  import.meta.env.VITE_APK_DOWNLOAD_URL ||
+  "https://github.com/burinious/sapa-tracker/releases/download/android-latest/sapatracker.apk";
 const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "/privacy";
 const TERMS_URL = import.meta.env.VITE_TERMS_URL || "/terms";
 const LOGO_SRC = "/assets/sapatracker-logo.svg";
@@ -65,6 +66,12 @@ const trustPoints = [
   { label: "2 min", caption: "Average setup time" },
   { label: "99.9%", caption: "Secure sign-in uptime" },
   { label: "24/7", caption: "Access on phone and web" },
+];
+
+const heroHighlights = [
+  "Fast manual tracking",
+  "Web and Android access",
+  "Weekly spending clarity",
 ];
 
 const features = [
@@ -148,7 +155,7 @@ const faqs = [
   {
     question: "How do I install the Android app?",
     answer:
-      "Tap the Download Android APK button to get the latest Android package from your deployment URL.",
+      "Tap the Download Android APK button to get the latest Android package from the GitHub release.",
   },
 ];
 
@@ -481,10 +488,23 @@ function App() {
               direction="row"
               spacing={0.6}
               alignItems="center"
-              sx={{ display: { xs: "none", md: "flex" } }}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                p: 0.45,
+                borderRadius: "999px",
+                bgcolor: alpha("#FFFFFF", 0.56),
+                border: "1px solid",
+                borderColor: alpha(COLORS.baseDark, 0.06),
+                boxShadow: "0 10px 30px rgba(17, 24, 39, 0.06)",
+              }}
             >
               {navLinks.map((item) => (
-                <Button key={item.href} href={item.href} color="inherit" sx={{ color: "text.secondary" }}>
+                <Button
+                  key={item.href}
+                  href={item.href}
+                  color="inherit"
+                  sx={{ color: "text.secondary", px: 1.35 }}
+                >
                   {item.label}
                 </Button>
               ))}
@@ -554,7 +574,10 @@ function App() {
             spacing={2}
             alignItems="center"
             textAlign="center"
-            sx={{ animation: `${fadeUp} ${MOTION.fadeUp.duration}ms ${MOTION.fadeUp.easing}` }}
+            sx={{
+              position: "relative",
+              animation: `${fadeUp} ${MOTION.fadeUp.duration}ms ${MOTION.fadeUp.easing}`,
+            }}
           >
             <Chip
               label="Personal finance, redesigned for daily clarity"
@@ -563,6 +586,8 @@ function App() {
                 bgcolor: alpha(COLORS.primary, 0.1),
                 color: "primary.dark",
                 fontWeight: 600,
+                border: "1px solid",
+                borderColor: alpha(COLORS.primary, 0.08),
               }}
             />
             <Typography
@@ -572,6 +597,7 @@ function App() {
                 lineHeight: TYPOGRAPHY.heroTitle.lineHeight,
                 letterSpacing: TYPOGRAPHY.heroTitle.letterSpacing,
                 maxWidth: 980,
+                textWrap: "balance",
               }}
             >
               Track your money.
@@ -589,9 +615,47 @@ function App() {
               <Button variant="contained" size="large" href={OPEN_APP_URL}>
                 Open App
               </Button>
-              <Button variant="text" size="large" href={APK_DOWNLOAD_URL} sx={{ color: "primary.main" }}>
+              <Button
+                variant="text"
+                size="large"
+                href={APK_DOWNLOAD_URL}
+                sx={{
+                  color: "primary.main",
+                  bgcolor: alpha(COLORS.primary, 0.06),
+                  "&:hover": { bgcolor: alpha(COLORS.primary, 0.1) },
+                }}
+              >
                 Download Android APK
               </Button>
+            </Stack>
+            <Stack
+              direction="row"
+              spacing={0.8}
+              useFlexGap
+              flexWrap="wrap"
+              justifyContent="center"
+              sx={{ pt: 0.2 }}
+            >
+              {heroHighlights.map((item) => (
+                <Stack
+                  key={item}
+                  direction="row"
+                  spacing={0.55}
+                  alignItems="center"
+                  sx={{
+                    px: 1.15,
+                    py: 0.7,
+                    borderRadius: "999px",
+                    bgcolor: alpha("#FFFFFF", 0.72),
+                    border: "1px solid",
+                    borderColor: alpha(COLORS.baseDark, 0.08),
+                    boxShadow: "0 10px 26px rgba(17, 24, 39, 0.05)",
+                  }}
+                >
+                  <CheckCircleRoundedIcon sx={{ fontSize: "1rem", color: "primary.main" }} />
+                  <Typography sx={{ fontSize: "0.9rem", color: "text.secondary" }}>{item}</Typography>
+                </Stack>
+              ))}
             </Stack>
           </Stack>
 
@@ -599,9 +663,22 @@ function App() {
             sx={{
               mt: { xs: 3, md: 5 },
               p: { xs: 1.4, md: 1.8 },
+              position: "relative",
+              overflow: "hidden",
               bgcolor: alpha("#FFFFFF", 0.8),
-              backdropFilter: "blur(10px)",
+              backdropFilter: "blur(14px)",
               animation: `${zoomIn} ${MOTION.zoomIn.duration}ms ${MOTION.zoomIn.easing}`,
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                width: { xs: 140, md: 220 },
+                height: { xs: 140, md: 220 },
+                top: -52,
+                right: -40,
+                borderRadius: "50%",
+                background: alpha(COLORS.primary, 0.12),
+                filter: "blur(12px)",
+              },
             }}
           >
             <Box
@@ -631,6 +708,30 @@ function App() {
                   background: BACKGROUNDS.mediaOverlay,
                 }}
               />
+              <Stack
+                spacing={0.6}
+                sx={{
+                  position: "absolute",
+                  left: { xs: 14, md: 26 },
+                  right: { xs: 14, md: "auto" },
+                  bottom: { xs: 14, md: 26 },
+                  maxWidth: { xs: "none", md: 320 },
+                  p: { xs: 1.2, md: 1.5 },
+                  borderRadius: 4,
+                  bgcolor: alpha("#FFFFFF", 0.88),
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid",
+                  borderColor: alpha(COLORS.baseDark, 0.08),
+                  boxShadow: "0 16px 40px rgba(17, 24, 39, 0.12)",
+                }}
+              >
+                <Typography sx={{ fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.08em", color: "primary.dark", textTransform: "uppercase" }}>
+                  Weekly Snapshot
+                </Typography>
+                <Typography sx={{ fontSize: { xs: "1.05rem", md: "1.2rem" }, lineHeight: 1.25, letterSpacing: "-0.03em" }}>
+                  Clear balances, category trends, and fast entries in one finance dashboard.
+                </Typography>
+              </Stack>
             </Box>
           </Card>
         </Box>
@@ -644,10 +745,19 @@ function App() {
                     height: "100%",
                     p: { xs: 1.6, md: 2 },
                     textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
                     bgcolor: alpha("#FFFFFF", 0.76),
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      inset: "0 0 auto 0",
+                      height: 3,
+                      background: `linear-gradient(90deg, ${alpha(COLORS.primary, 0.72)} 0%, ${alpha(COLORS.accentWarm, 0.7)} 100%)`,
+                    },
                   }}
                 >
-                  <Typography sx={{ fontSize: { xs: "1.35rem", md: "1.7rem" }, letterSpacing: "-0.03em" }}>
+                  <Typography sx={{ fontSize: { xs: "1.35rem", md: "1.7rem" }, letterSpacing: "-0.03em", mt: 0.35 }}>
                     {point.label}
                   </Typography>
                   <Typography color="text.secondary" sx={{ fontSize: "0.84rem", mt: 0.3 }}>
@@ -693,7 +803,15 @@ function App() {
           <Grid container spacing={1.4} sx={{ mt: 2.5 }}>
             {steps.map((item) => (
               <Grid item key={item.step} xs={12} md={4}>
-                <Card sx={{ height: "100%", p: { xs: 2.2, md: 2.8 }, bgcolor: alpha("#FFFFFF", 0.8) }}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    p: { xs: 2.2, md: 2.8 },
+                    bgcolor: alpha("#FFFFFF", 0.8),
+                    backgroundImage:
+                      "linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.96) 100%)",
+                  }}
+                >
                   <Typography
                     sx={{
                       color: alpha(COLORS.baseDark, 0.32),
@@ -724,7 +842,18 @@ function App() {
           <Grid container spacing={1.6} sx={{ mt: 2.4 }}>
             {demoScreens.map((item) => (
               <Grid item key={item.label} xs={12} sm={6} md={4}>
-                <Card sx={{ overflow: "hidden", height: "100%", bgcolor: alpha("#FFFFFF", 0.82) }}>
+                <Card
+                  sx={{
+                    overflow: "hidden",
+                    height: "100%",
+                    bgcolor: alpha("#FFFFFF", 0.82),
+                    transition: MOTION.cardTransition,
+                    "&:hover": {
+                      transform: "translateY(-6px)",
+                      boxShadow: "0 24px 52px rgba(17, 24, 39, 0.12)",
+                    },
+                  }}
+                >
                   <Box
                     component="img"
                     src={item.image}
@@ -757,10 +886,23 @@ function App() {
               <Card
                 sx={{
                   height: "100%",
+                  position: "relative",
+                  overflow: "hidden",
                   p: { xs: 2.2, md: 2.8 },
-                  bgcolor: COLORS.baseDark,
+                  background:
+                    "linear-gradient(160deg, rgba(20,20,24,1) 0%, rgba(29,29,31,0.98) 58%, rgba(9,78,158,0.92) 100%)",
                   color: "common.white",
                   borderColor: alpha("#FFFFFF", 0.16),
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    width: 180,
+                    height: 180,
+                    top: -80,
+                    right: -50,
+                    borderRadius: "50%",
+                    background: alpha("#FFFFFF", 0.08),
+                  },
                 }}
               >
                 <Typography sx={{ color: alpha("#FFFFFF", 0.75), fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
@@ -842,13 +984,45 @@ function App() {
           <Card
             sx={{
               p: { xs: 2.2, md: 3.4 },
+              position: "relative",
+              overflow: "hidden",
               background: BACKGROUNDS.cta,
               color: "common.white",
               borderColor: alpha("#FFFFFF", 0.32),
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                width: { xs: 180, md: 260 },
+                height: { xs: 180, md: 260 },
+                top: -100,
+                right: -80,
+                borderRadius: "50%",
+                background: alpha("#FFFFFF", 0.12),
+              },
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                width: { xs: 120, md: 180 },
+                height: { xs: 120, md: 180 },
+                bottom: -60,
+                left: -40,
+                borderRadius: "50%",
+                background: alpha("#FFFFFF", 0.08),
+              },
             }}
           >
-            <Grid container spacing={2} alignItems="center">
+            <Grid container spacing={2} alignItems="center" sx={{ position: "relative", zIndex: 1 }}>
               <Grid item xs={12} md={8}>
+                <Chip
+                  label="Latest Android build"
+                  sx={{
+                    mb: 1.3,
+                    bgcolor: alpha("#FFFFFF", 0.14),
+                    color: "common.white",
+                    border: "1px solid",
+                    borderColor: alpha("#FFFFFF", 0.22),
+                  }}
+                />
                 <Typography sx={{ fontSize: { xs: "1.75rem", sm: "2.1rem", md: "2.6rem" }, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
                   Ready to stop guessing where your money goes?
                 </Typography>
@@ -876,6 +1050,9 @@ function App() {
                     Download Android APK
                   </Button>
                 </Stack>
+                <Typography sx={{ mt: 1.2, color: alpha("#FFFFFF", 0.72), fontSize: "0.92rem" }}>
+                  APK delivery is wired to the latest GitHub release artifact.
+                </Typography>
               </Grid>
               <Grid item xs={12} md={4}>
                 <Box
