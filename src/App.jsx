@@ -47,7 +47,7 @@ import androidAppInstallImg from "./assets/illustrations/sapatracker-android-app
 
 const APK_DOWNLOAD_URL =
   import.meta.env.VITE_APK_DOWNLOAD_URL ||
-  "https://github.com/burinious/sapa-tracker/releases/download/android-latest/sapatracker.apk";
+  "https://github.com/burinious/sapa-tracker/releases/latest/download/sapatracker.apk";
 const OPEN_APP_URL = import.meta.env.VITE_OPEN_APP_URL || APK_DOWNLOAD_URL;
 const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "/privacy";
 const TERMS_URL = import.meta.env.VITE_TERMS_URL || "/terms";
