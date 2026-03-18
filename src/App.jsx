@@ -45,11 +45,10 @@ import smartDashboardDevicesImg from "./assets/illustrations/sapatracker-smart-d
 import secureLoginFintechImg from "./assets/illustrations/sapatracker-secure-login-fintech.png";
 import androidAppInstallImg from "./assets/illustrations/sapatracker-android-app-install.png";
 
-const OPEN_APP_URL =
-  import.meta.env.VITE_OPEN_APP_URL || "https://sapa-tracker-c5886.firebaseapp.com";
 const APK_DOWNLOAD_URL =
   import.meta.env.VITE_APK_DOWNLOAD_URL ||
   "https://github.com/burinious/sapa-tracker/releases/download/android-latest/sapatracker.apk";
+const OPEN_APP_URL = import.meta.env.VITE_OPEN_APP_URL || APK_DOWNLOAD_URL;
 const PRIVACY_POLICY_URL = import.meta.env.VITE_PRIVACY_POLICY_URL || "/privacy";
 const TERMS_URL = import.meta.env.VITE_TERMS_URL || "/terms";
 const LOGO_SRC = "/assets/sapatracker-logo.svg";
